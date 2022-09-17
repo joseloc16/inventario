@@ -11,18 +11,19 @@ import java.io.Serializable;
 public class Producto implements Serializable {
 
   @Id
-  @GeneratedValue(strategy = GenerationType.AUTO)
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Integer id;
 
   @Column(name = "codigo_barras")
   private String codigoBarras;
 
-  @Column(name = "descripcion")
   private String descripcion;
 
-  @Column(name = "marca")
+  @OneToOne//Un producto puede tener una marca
+  @JoinColumn(name = "marca_id", nullable = false)
   private Marca marca;
 
-  @Column(name = "categoria")
+  @ManyToOne//un producto puede pertenecer a otras categorias
+  @JoinColumn(name = "categoria_id", nullable = false)
   private Categoria categoria;
 }
